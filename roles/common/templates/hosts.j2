@@ -1,0 +1,8 @@
+---
+# Hosts file add-on
+{% for item in groups['all'] %}
+{%- if item != 'localhost' %}
+{{ hostvars[item].ansible_facts.default_ipv4.address }}       {{ hostvars[item].ansible_hostname }}
+{% endif %}
+{% endfor %}
+

@@ -1,0 +1,11 @@
+---
+- hosts: all
+  gather_facts: true
+  tasks:
+  - name: Display all hostnames
+    debug:
+      msg: "The hostname is {{ ansible_hostname }} and the OS is {{ ansible_os_family }}"
+  roles:
+    - common
+
+...

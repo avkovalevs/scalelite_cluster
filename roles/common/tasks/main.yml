@@ -1,2 +1,48 @@
 ---
 # tasks file for common
+- name: "Update /etc/hosts file"
+  blockinfile:
+    dest: /etc/hosts
+    content: "{{ lookup('template', 'hosts.j2') }}"
+    state: present
+  tags: common
+
+- name: Change ssh_config parameter StrictHostKeyChecking to no
+  lineinfile:
+    path: /etc/ssh/ssh_config
+    regexp: '^StrictHostKeyChecking'
+    line: 'StrictHostKeyChecking = no'
+    state: present
+  tags: common
+
+- sysctl:
+    name: net.ipv6.conf.all.disable_ipv6
+    value: '1'
+    state: present
+  tags: common
+
+- sysctl:
+    name: net.ipv6.conf.default.disable_ipv6
+    value: '1'
+    state: present
+  tags: common
+
+- sysctl:
+    name: net.ipv6.conf.lo.disable_ipv6
+    value: '1'
+    state: present
+  tags: common
+- name: "Install system packages"
+  apt:
+    name: "{{ packages }}"
+    force_apt_get: true
+  vars:
+    packages:
+    - nmap
+    - curl
+    - wget
+    - nmon
+    - software-properties-common
+  tags: common
+
+...
