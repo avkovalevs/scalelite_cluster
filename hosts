@@ -1,0 +1,61 @@
+# This is the default ansible 'hosts' file.
+#
+# It should live in /etc/ansible/hosts
+#
+#   - Comments begin with the '#' character
+#   - Blank lines are ignored
+#   - Groups of hosts are delimited by [header] elements
+#   - You can enter hostnames or ip addresses
+#   - A hostname/ip can be a member of multiple groups
+
+# Ex 1: Ungrouped hosts, specify before any group headers.
+
+## green.example.com
+## blue.example.com
+## 192.168.100.1
+## 192.168.100.10
+
+# Ex 2: A collection of hosts belonging to the 'webservers' group
+
+[ansible]
+jeff1.academyofmine.net ansible_host=104.156.55.133 ssh_port=35058
+
+[bbb]
+jeff2.academyofmine.net ansible_host=199.193.115.217 ssh_port=34342
+jeff3.academyofmine.net ansible_host=104.156.49.18 ssh_port=20047
+jeff4.academyofmine.net ansible_host=209.133.222.130 ssh_port=38327
+jeff5.academyofmine.net ansible_host=162.220.60.150 ssh_port=35533
+jeff6.academyofmine.net ansible_host=23.111.131.62 ssh_port=37786
+jeff7.academyofmine.net ansible_host=209.133.214.3 ssh_port=34681
+jeff8.academyofmine.net ansible_host=162.252.82.9 ssh_port=41913
+jeff9.academyofmine.net ansible_host=104.156.62.146 ssh_port=28973
+jeff10.academyofmine.net ansible_host=209.133.210.105 ssh_port=34076
+jeff11.academyofmine.net ansible_host=209.133.213.10 ssh_port=28326
+jeff12.academyofmine.net ansible_host=209.133.216.90 ssh_port=33616
+
+[pg]
+jeff1.academyofmine.net ansible_host=104.156.55.133 ssh_port=35058
+
+[lb]
+jeff1.academyofmine.net ansible_host=104.156.55.133 ssh_port=35058
+
+[redis]
+jeff1.academyofmine.net ansible_host=104.156.55.133 ssh_port=35058
+
+
+## www[001:006].example.com
+
+# Ex 3: A collection of database servers in the 'dbservers' group
+
+## [dbservers]
+## 
+## db01.intranet.mydomain.net
+## db02.intranet.mydomain.net
+## 10.25.1.56
+## 10.25.1.57
+
+# Here's another example of host ranges, this time there are no
+# leading 0s:
+
+## db-[99:101]-node.example.com
+
