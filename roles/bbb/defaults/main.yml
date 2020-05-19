@@ -1,2 +1,3 @@
 ---
 # defaults file for bbb
+nodejs_version: 8

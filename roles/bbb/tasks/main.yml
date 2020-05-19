@@ -1,2 +1,77 @@
 ---
 # tasks file for bbb
+- name: "BBB | Add BBB repo"
+  apt_repository:
+    repo: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items:
+    - ppa:bigbluebutton/support
+    - ppa:rmescandon/yq
+  tags: bbb
+
+- name: "MongoDB | Import MongoDB public GPG key"
+  apt_key: 
+    id: 7F0CEB10   
+    keyserver: keyserver.ubuntu.com
+    state: present
+  tags: bbb
+
+- name: "MongoDB | Add MongoDB repo"
+  apt_repository: 
+    repo: 'deb http://repo.mongodb.org/apt/ubuntu {{ ansible_distribution_release }}/mongodb-org/3.4 multiverse'
+    state: present                                      
+  tags: bbb
+
+- name: "MongoDB | Install MongoDB package"
+  apt: 
+    pkg: mongodb-org 
+    state: present
+    update_cache: yes
+    force_apt_get: true
+    allow_unauthenticated: yes
+  tags: bbb
+
+- name: "NodeJS | Import NodeJS public GPG key"
+  apt_key:
+    url: "https://deb.nodesource.com/gpgkey/nodesource.gpg.key"
+    state: present
+  tags: bbb
+
+- name: "NodeJS | Add NodeJS LTS repo"
+  apt_repository:
+    repo: "deb https://deb.nodesource.com/node_{{ nodejs_version }}.x {{ ansible_distribution_release }} main"
+    state: present
+    update_cache: yes
+  tags: bbb
+
+- name: "NodeJS | Install NodeJS package"
+  apt:
+    name: nodejs
+    state: present
+    update_cache: yes
+  tags: bbb
+
+- name: "BBB | Import BBB public GPG key"
+  apt_key:
+    url: "https://ubuntu.bigbluebutton.org/repo/bigbluebutton.asc"
+    state: present
+  tags: bbb
+
+- name: "BBB | Add BBB LTS repo"
+  apt_repository:
+    repo: "deb https://ubuntu.bigbluebutton.org/xenial-22/ bigbluebutton-{{ ansible_distribution_release }} main"
+    state: present
+    update_cache: yes
+  tags: bbb
+
+- name: "BBB | Install BigBlueButton packages"
+  apt:
+    name: "{{ packages }}"
+    force_apt_get: true
+  vars:
+    packages:
+    - bigbluebutton
+    - bbb-html5
+  tags: bbb
+

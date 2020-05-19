@@ -32,6 +32,7 @@
     value: '1'
     state: present
   tags: common
+
 - name: "Install system packages"
   apt:
     name: "{{ packages }}"
@@ -43,6 +44,21 @@
     - wget
     - nmon
     - software-properties-common
+    - apt-transport-https
+    - ca-certificates
+    - language-pack-en
   tags: common
+
+- name: Add Docker GPG apt Key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+  tags: common,docker
+
+- name: Add Docker Repository
+  apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu xenial stable
+    state: present
+  tags: common,docker
 
 ...

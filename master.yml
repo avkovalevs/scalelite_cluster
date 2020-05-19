@@ -8,4 +8,12 @@
   roles:
     - common
 
+- hosts: bbb
+  tasks:
+  - name: Display all bbb hostnames
+    debug:
+      msg: "The hostname is {{ ansible_hostname }} and the OS is {{ ansible_os_family }}"
+  roles:
+    - bbb
+
 ...
