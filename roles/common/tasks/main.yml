@@ -47,6 +47,7 @@
     - apt-transport-https
     - ca-certificates
     - language-pack-en
+    - openjdk-8-jdk
   tags: common
 
 - name: Add Docker GPG apt Key

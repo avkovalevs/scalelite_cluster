@@ -1,2 +1,50 @@
 ---
 # tasks file for pg
+- name: "PG | Add Ubuntu postgres repo"
+  apt_repository:
+    repo: 'deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main'
+    filename: 'pgdg'
+  tags: pg
+
+- name: "PG | Add an Apt signing key"
+  apt_key:
+    url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+    state: present
+  tags: pg
+
+- name: "PG | Install postgres & python packages for ansible modules"
+  apt:
+    name: "{{ pg_packages }}"
+    allow_unauthenticated: true
+    force_apt_get: true
+  vars:
+    pg_packages:
+    - postgresql-12
+    - postgresql-client-12
+    - postgresql-contrib-12
+    - libevent-dev
+    - python-psycopg2
+  tags: pg
+
+- name: "PG | Create role" 
+  postgresql_user:
+    db: postgres
+    name: "{{ pg_user }}" 
+    password: "{{ pg_pass }}"
+    encrypted: yes
+    role_attr_flags: CREATEDB,SUPERUSER
+  no_log: true
+  become: true
+  become_user: "{{ pg_owner }}"
+  tags: pg
+
+- name: "PG | Create the database"
+  postgresql_db:
+    name: "{{ pg_database }}"
+    owner: "{{ pg_user }}"
+  become: true
+  become_user: "{{ pg_owner }}"
+  tags: pg
+
+
+...

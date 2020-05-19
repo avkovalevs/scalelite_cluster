@@ -65,13 +65,27 @@
     update_cache: yes
   tags: bbb
 
-- name: "BBB | Install BigBlueButton packages"
-  apt:
-    name: "{{ packages }}"
-    force_apt_get: true
-  vars:
-    packages:
-    - bigbluebutton
-    - bbb-html5
+#- name: "BBB | Install BigBlueButton packages"
+#  apt:
+#    name: "{{ packages }}"
+#    force_apt_get: true
+#  vars:
+#    packages:
+#    - bigbluebutton
+#    - bbb-html5
+#  tags: bbb
+
+- name: "BBB | Ensure group scalelite-spool exists"
+  group:
+    name: scalelite-spool
+    gid: 2000 
+    state: present
   tags: bbb
 
+- name: "BBB | Add BBB user to groups"
+  user:
+    name: bigbluebutton
+    groups: scalelite-spool
+    append: yes
+  tags: bbb
+...

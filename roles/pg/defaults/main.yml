@@ -1,2 +1,6 @@
 ---
 # defaults file for pg
+pg_user: scalelite
+pg_owner: postgres
+pg_pass: bn7890pk
+pg_database: scalelite
