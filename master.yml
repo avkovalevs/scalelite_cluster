@@ -18,9 +18,17 @@
 
 - hosts: pg
   tasks:
-  - name: Display all bbb hostnames
+  - name: Display all pg hostnames
     debug:
       msg: "The hostname is {{ ansible_hostname }} and the OS is {{ ansible_os_family }}"
   roles:
     - pg
+
+- hosts: redis
+  tasks:
+  - name: Display all redis hostnames
+    debug:
+      msg: "The hostname is {{ ansible_hostname }} and the OS is {{ ansible_os_family }}"
+  roles:
+    - redis
 ...

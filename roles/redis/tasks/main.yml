@@ -1,2 +1,50 @@
 ---
 # tasks file for redis
+
+- name: "Redis | Add env to file"
+  lineinfile:
+    path: "/etc/default/redis"
+    line: REDIS_DATA_DIR=/mnt/redis
+    create: yes
+  tags: redis
+
+- name: "Redis | install python-pip"
+  apt:
+    name: "{{ item }}"
+    state: latest
+    update_cache: true
+  with_items:
+    - python
+    - python-pip
+  tags: redis
+
+- name: "Redis | docker-py"
+  pip:
+    name: docker-py
+    executable: pip
+    state: latest
+  tags: redis
+
+- name: "Redis | Create a network scalelite"
+  docker_network:
+    name: scalelite
+    state: present
+  tags: redis
+
+- name: "Redis | Re-create a redis container"
+  docker_container:
+    name: redis
+    image: redis
+    hostname: redis
+    command: redis-server --appendonly yes
+    state: started
+    recreate: yes
+    env_file: /etc/default/redis
+    networks:
+    - name: scalelite
+    exposed_ports:
+      - 6379
+    volumes:
+      - /mnt/redis:/data  
+  tags: redis
+...
