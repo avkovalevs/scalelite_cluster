@@ -4,7 +4,7 @@
   tasks:
   - name: Display all hostnames
     debug:
-      msg: "The hostname is {{ ansible_hostname }} and the OS is {{ ansible_os_family }}"
+      msg: "The hostname is {{ ansible_hostname }} and the OS is {{ ansible_os_family }} and {{ ansible_port }}"
   roles:
     - common
 

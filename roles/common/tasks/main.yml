@@ -48,6 +48,7 @@
     - ca-certificates
     - language-pack-en
     - openjdk-8-jdk
+    - ufw
   tags: common
 
 - name: Add Docker GPG apt Key
@@ -62,4 +63,38 @@
     state: present
   tags: common,docker
 
+- name: "UFW | Configure ufw default policy"
+  ufw: direction={{ item.direction }} policy={{ item.policy }}
+  with_items:
+    - { direction: 'incoming', policy: 'deny' }
+    - { direction: 'outgoing', policy: 'allow' }
+  tags: common,ufw
+
+- name: "UFW | Allow TCP ports 80, 443, 53, ssh-nonedefault"
+  ufw:
+    rule: allow
+    port: "{{ item }}"
+    proto: tcp
+  with_items:
+  - '80'
+  - '443'
+  - '53'
+  - '{{ ansible_port }}'
+  tags: common,ufw
+
+- name: "UFW | Allow UDP port range 16384:32768"
+  ufw:
+    rule: allow
+    port: 16384:32768
+    proto: udp
+  tags: common,ufw
+ 
+- name: "UFW | Enable ufw logging"
+  ufw: logging=on
+  tags: common,ufw
+ 
+#- name: "UFW | Enable ufw"
+#  ufw:
+#    state: enabled 
+#  tags: common,ufw
 ...

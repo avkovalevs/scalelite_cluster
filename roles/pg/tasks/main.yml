@@ -46,5 +46,30 @@
   become_user: "{{ pg_owner }}"
   tags: pg
 
+- name: "PG | Change postgreSQL.conf"
+  lineinfile:
+   dest: "/etc/postgresql/12/main/postgresql.conf"
+   regexp: "{{ item.regexp }}"
+   line: "{{ item.line }}"
+   backrefs: yes
+   state: present
+  with_items:
+   - { regexp: '^#listen_addresses =', line: "listen_addresses = '*'" }
+  tags: pg
+
+#- name: "PG | Grant access to db via ph_hba.conf"
+#  lineinfile:
+#    path: /etc/postgresql/12/main/pg_hba.conf
+#    regexp: '^# IPv6 local connections'
+#    line: 'host    scalelite       scalelite       .academyofmine.net      md5' 
+#    insertbefore: "# IPv6 local connections"
+#  tags: pg
+
+- name: "Restart service postgres on replicas"
+  systemd:
+    state: restarted
+    daemon_reload: yes
+    name: postgresql@12-main.service
+  tags: pg
 
 ...
