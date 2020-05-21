@@ -68,13 +68,18 @@
 - name: "BBB | Check on BBB already installed"
   stat:
     path: /usr/bin/bbb-conf
-    register: stat_result
+  register: stat_result
   tags: bbb
 
-- name: "BBB | Install all BBB software"
-  command: "/usr/bin/wget -qO- {{ bbb_script }} | bash -s -- -v xenial-22 -s {{ ansible_nodename }} -e {{ email }} -c {{ turn }}"
-  when: not stat_result.stat.exists
+- name: "BBB | Debug stat_result"
+  debug:
+    var: stat_result 
   tags: bbb
+
+#- name: "BBB | Install all BBB software"
+#  command: "/usr/bin/wget -qO- {{ bbb_script }} | bash -s -- -v xenial-22 -s {{ ansible_nodename }} -e {{ email }} -c {{ turn }}"
+#  when: not stat_result.stat.exists
+#  tags: bbb
 
 - name: "BBB | Ensure group scalelite-spool exists for NFS mount"
   group:

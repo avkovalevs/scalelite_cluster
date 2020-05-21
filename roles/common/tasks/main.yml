@@ -1,13 +1,13 @@
 ---
 # tasks file for common
-- name: "Update /etc/hosts file"
+- name: "Common | Update /etc/hosts file"
   blockinfile:
     dest: /etc/hosts
     content: "{{ lookup('template', 'hosts.j2') }}"
     state: present
   tags: common
 
-- name: Change ssh_config parameter StrictHostKeyChecking to no
+- name: "Common | Change ssh_config parameter StrictHostKeyChecking to no"
   lineinfile:
     path: /etc/ssh/ssh_config
     regexp: '^StrictHostKeyChecking'
@@ -15,25 +15,25 @@
     state: present
   tags: common
 
-- sysctl:
-    name: net.ipv6.conf.all.disable_ipv6
-    value: '1'
-    state: present
-  tags: common
+#- sysctl:
+#    name: net.ipv6.conf.all.disable_ipv6
+#    value: '1'
+#    state: present
+#  tags: common
 
-- sysctl:
-    name: net.ipv6.conf.default.disable_ipv6
-    value: '1'
-    state: present
-  tags: common
+#- sysctl:
+#    name: net.ipv6.conf.default.disable_ipv6
+#    value: '1'
+#    state: present
+#  tags: common
 
-- sysctl:
-    name: net.ipv6.conf.lo.disable_ipv6
-    value: '1'
-    state: present
-  tags: common
+#- sysctl:
+#    name: net.ipv6.conf.lo.disable_ipv6
+#    value: '1'
+#    state: present
+#  tags: common
 
-- name: "Install system packages"
+- name: "Common | Install system packages"
   apt:
     name: "{{ packages }}"
     force_apt_get: true
@@ -51,16 +51,34 @@
     - ufw
   tags: common
 
-- name: Add Docker GPG apt Key
+- name: "Docker | Add Docker GPG apt Key"
   apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
     state: present
   tags: common,docker
 
-- name: Add Docker Repository
+- name: "Docker | Add Docker Repository"
   apt_repository:
     repo: deb https://download.docker.com/linux/ubuntu xenial stable
     state: present
+  tags: common,docker
+
+- name: "Docker | Install docker packages"
+  apt:
+    name: "{{ packages }}"
+    force_apt_get: true
+  vars:
+    packages:
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
+  tags: common,docker
+
+- name: Install docker-compose
+  get_url: 
+    url : https://github.com/docker/compose/releases/download/1.25.5/docker-compose-Linux-x86_64
+    dest: /usr/local/bin/docker-compose
+    mode: 'u+x,g+x'
   tags: common,docker
 
 - name: "UFW | Configure ufw default policy"
