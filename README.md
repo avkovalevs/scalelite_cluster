@@ -1,6 +1,6 @@
 Scalelite Cluster tuning playbook
 =======
-The goal is to create a BBB cluster with Load Balancing for Learning Platform academyofmine.net 
+The goal is to create a BBB cluster with Load Balancing for Learning Platform 
 The current architecture consist of:
 - 11 BBB server nodes
 - 1 Scalelite + PG + Redis node
@@ -9,7 +9,7 @@ The current architecture consist of:
 ------
 Software requirements
 ------
-Ubuntu 16.04 LTS, Ansible 2.9.9, PostgreSQL 12.3, Nginx 1.16, Scalelite, Redis(image), NFS, Docker and Docker-compose (latest)
+Ubuntu 16.04 LTS, Ansible 2.9.9, PostgreSQL 12.3, Nginx 1.16, Scalelite(images), Redis(image), NFS, Docker and Docker-compose (latest)
 
 Install Ansible software on master host (in my case LB node)
 ------
