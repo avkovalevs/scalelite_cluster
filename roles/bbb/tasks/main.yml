@@ -89,4 +89,29 @@
     groups: scalelite-spool
     append: yes
   tags: bbb
+
+- name: "BBB | Copy scalelite_post_publish.rb to BBB servers for transfer records"
+  copy:
+    src: "{{ role_path }}/files/scalelite_post_publish.rb"
+    dest: "/usr/local/bigbluebutton/core/scripts/post_publish"
+    force: no
+    mode: 0755
+  tags: bbb
+
+- name: "BBB | Copy scalelite.yml to BBB servers for transfer records"
+  copy:
+    src: "{{ role_path }}/files/scalelite.yml"
+    dest: "/usr/local/bigbluebutton/core/scripts"
+    force: no
+    mode: 0744
+  tags: bbb
+
+- name: "BBB | Copy scalelite_batch_import.sh to BBB servers for transfer records"
+  copy:
+    src: "{{ role_path }}/files/scalelite_batch_import.sh"
+    dest: "/usr/local/bigbluebutton/core/scripts"
+    force: no
+    mode: 0755
+  tags: bbb
+
 ...
