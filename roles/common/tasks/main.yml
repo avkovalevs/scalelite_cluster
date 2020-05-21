@@ -49,6 +49,7 @@
     - language-pack-en
     - openjdk-8-jdk
     - ufw
+    - nfs-common
   tags: common
 
 - name: "Docker | Add Docker GPG apt Key"
@@ -115,4 +116,25 @@
 #  ufw:
 #    state: enabled 
 #  tags: common,ufw
+- name: "NFS | Make sure /mnt/scalelite-recordings dir exist on targets"
+  stat:
+    path: "/mnt/scalelite-recordings"
+  register: stat_result
+  tags: common,nfs
+
+- name: "NFS | Create /mnt/scalelite-recordings if not exist"
+  file:
+    path: "/mnt/scalelite-recordings"
+    state: directory
+    mode: 0755
+  when: not stat_result.stat.exists
+  tags: common,nfs
+
+- name: "NFS | Mount NFS share on targets"
+  mount:
+    path: "/mnt/scalelite-recordings"
+    src: "3.22.225.137:/mnt/scalelite-recordings"
+    fstype: nfs
+    state: mounted
+  tags: common,nfs
 ...

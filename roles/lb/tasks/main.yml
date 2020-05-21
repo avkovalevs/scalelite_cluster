@@ -7,3 +7,9 @@
   when: ansible_distribution == "Ubuntu" 
   tags: lb
 
+- name: "LB | Create a network scalelite"
+  docker_network:
+    name: scalelite
+    state: present
+  tags: lb
+
