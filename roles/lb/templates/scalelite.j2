@@ -1,0 +1,9 @@
+URL_HOST={{ ansible_nodename }}
+SECRET_KEY_BASE=3d9b131702ac5addd95fc78fce18fb60b83ba0a1f4a20cdd58f0b33363ce33e4ee66cfdb3405ce747c1c6a4b289464d59d34ff0b36dd0bab720e133d99d298b3
+LOADBALANCER_SECRET=aabc8709144c24eff4240caccee153cdc3e1b64981a58f8005683ab25c20e667
+DATABASE_URL=postgresql://scalelite:bn7890pk@jeff1:5432/scalelite
+REDIS_URL=redis://redis
+SCALELITE_TAG=v1
+SCALELITE_RECORDING_DIR=/mnt/scalelite-recordings/var/bigbluebutton
+NGINX_SSL=true
+SCALELITE_NGINX_EXTRA_OPTS=--mount type=bind,source=/etc/letsencrypt,target=/etc/nginx/ssl,readonly

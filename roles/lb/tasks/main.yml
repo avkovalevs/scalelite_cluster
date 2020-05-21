@@ -1,2 +1,9 @@
 ---
 # tasks file for lb
+- name: "LB | Copy template scalelite.j2"
+  template:
+    src: "scalelite.j2"
+    dest: /etc/default/scalelite
+  when: ansible_distribution == "Ubuntu" 
+  tags: lb
+

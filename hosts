@@ -42,6 +42,8 @@ jeff1.academyofmine.net ansible_host=104.156.55.133 ansible_port=35058
 [redis]
 jeff1.academyofmine.net ansible_host=104.156.55.133 ansible_port=35058
 
+[nfs]
+ec2-3-22-225-137.us-east-2.compute.amazonaws.com ansible_host=3.22.225.137 ansible_port=22
 
 ## www[001:006].example.com
 

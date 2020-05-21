@@ -1,3 +1,6 @@
 ---
 # defaults file for bbb
 nodejs_version: 8
+bbb_script: https://ubuntu.bigbluebutton.org/bbb-install.sh
+email: dev@academyofmine.com
+turn: coturn-server.academyofmine.net:north45bat

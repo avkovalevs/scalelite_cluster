@@ -42,8 +42,8 @@
     env_file: /etc/default/redis
     networks:
     - name: scalelite
-    exposed_ports:
-      - 6379
+    ports:
+    - "6379:6379"
     volumes:
       - /mnt/redis:/data  
   tags: redis

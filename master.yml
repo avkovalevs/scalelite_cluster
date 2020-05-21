@@ -31,4 +31,12 @@
       msg: "The hostname is {{ ansible_hostname }} and the OS is {{ ansible_os_family }}"
   roles:
     - redis
+
+- hosts: lb
+  tasks:
+  - name: Display all lb hostnames
+    debug:
+      msg: "The hostname is {{ ansible_hostname }} and the OS is {{ ansible_os_family }}"
+  roles:
+    - lb
 ...
