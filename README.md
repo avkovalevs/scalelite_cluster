@@ -13,17 +13,17 @@ Ubuntu 16.04 LTS, Ansible 2.9.9, PostgreSQL 12.3, Nginx 1.16, Scalelite(images),
 ------
 Hardware requerements
 ------
-BBB nodes: 4CPU, 8G RAM, 4G Swap, 200G Storage.
-NFS node: 2CPU, 4G RAM, 4G Swap, 250G Storage, 600IOPS.
+- BBB nodes: 4CPU, 8G RAM, 4G Swap, 200G Storage
+- NFS node: 2CPU, 4G RAM, 4G Swap, 250G Storage, 600IOPS
 
 ------
 Network requerements
 ------
-BBB nodes: opened ports (22/tcp, 80/tcp, 443/tcp, 53/tcp, 16384:32768/udp).
-NFS node: opened ports (22/tcp, 2049/tcp, 111/tcp).
-DNS A records to all BBB and Scalelite nodes.
-250Mbit/sec bandwidth.
-IPv4 and IPv6.
+- BBB nodes: opened ports (22/tcp, 80/tcp, 443/tcp, 53/tcp, 16384:32768/udp)
+- NFS node: opened ports (22/tcp, 2049/tcp, 111/tcp)
+- DNS A records to all BBB and Scalelite nodes
+- 250Mbit/sec bandwidth
+- IPv4 and IPv6
 
 ------
 Install Ansible software on master host (in my case LB node)
