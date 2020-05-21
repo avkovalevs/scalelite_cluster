@@ -3,7 +3,7 @@ jeff1.academyofmine.net ansible_host=104.156.55.133 ansible_port=35058
 
 [bbb]
 jeff2.academyofmine.net ansible_host=199.193.115.217 ansible_port=34342
-#jeff3.academyofmine.net ansible_host=104.156.49.18 ansible_port=20047
+jeff3.academyofmine.net ansible_host=104.156.49.18 ansible_port=20047
 jeff4.academyofmine.net ansible_host=209.133.222.130 ansible_port=38327
 jeff5.academyofmine.net ansible_host=162.220.60.150 ansible_port=35533
 jeff6.academyofmine.net ansible_host=23.111.131.62 ansible_port=37786

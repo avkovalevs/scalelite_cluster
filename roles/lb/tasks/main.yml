@@ -13,3 +13,53 @@
     state: present
   tags: lb
 
+- name: "LB | Copy template scalelite.target.j2"
+  template:
+    src: "scalelite.target.j2"
+    dest: /etc/systemd/system/scalelite.target
+  when: ansible_distribution == "Ubuntu" 
+  tags: lb
+
+- name: "LB | Enable scalelite.target"
+  systemd:
+    name: scalelite.target
+    enabled: yes
+    daemon_reload: yes
+  tags: lb
+
+- name: "LB | Copy template scalelite-api.service.j2"
+  template:
+    src: "scalelite-api.service.j2"
+    dest: /etc/systemd/system/scalelite-api.service
+  when: ansible_distribution == "Ubuntu" 
+  tags: lb
+
+- name: "LB | Enable scalelite-api.service"
+  systemd:
+    name: scalelite-api.service
+    enabled: yes
+    daemon_reload: yes
+  tags: lb
+
+- name: "LB | Copy template scalelite-nginx.service.j2"
+  template:
+    src: "scalelite-nginx.service.j2"
+    dest: /etc/systemd/system/scalelite-nginx.service
+  when: ansible_distribution == "Ubuntu" 
+  tags: lb
+
+- name: "LB | Enable scalelite-nginx.service"
+  systemd:
+    name: scalelite-nginx.service
+    enabled: yes
+    daemon_reload: yes
+  tags: lb
+
+- name: "LB | Restart scalelite.target"
+  systemd:
+    name: scalelite.target
+    state: restarted
+    daemon_reload: yes
+  tags: lb
+
+...

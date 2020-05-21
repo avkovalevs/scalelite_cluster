@@ -116,6 +116,7 @@
 #  ufw:
 #    state: enabled 
 #  tags: common,ufw
+
 - name: "NFS | Make sure /mnt/scalelite-recordings dir exist on targets"
   stat:
     path: "/mnt/scalelite-recordings"
@@ -133,7 +134,7 @@
 - name: "NFS | Mount NFS share on targets"
   mount:
     path: "/mnt/scalelite-recordings"
-    src: "3.22.225.137:/mnt/scalelite-recordings"
+    src: "3.22.92.68:/mnt/scalelite-recordings"
     fstype: nfs
     state: mounted
   tags: common,nfs
