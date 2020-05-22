@@ -55,6 +55,34 @@
     daemon_reload: yes
   tags: lb
 
+- name: "LB | Copy template scalelite-poller.service.j2"
+  template:
+    src: "scalelite-poller.service.j2"
+    dest: /etc/systemd/system/scalelite-poller.service
+  when: ansible_distribution == "Ubuntu" 
+  tags: lb
+
+- name: "LB | Enable scalelite-poller.service"
+  systemd:
+    name: scalelite-poller.service
+    enabled: yes
+    daemon_reload: yes
+  tags: lb
+
+- name: "LB | Copy template scalelite-recording-importer.service.j2"
+  template:
+    src: "scalelite-recording-importer.service.j2"
+    dest: /etc/systemd/system/scalelite-recording-importer.service
+  when: ansible_distribution == "Ubuntu" 
+  tags: lb
+
+- name: "LB | Enable scalelite-recording-importer.service"
+  systemd:
+    name: scalelite-recording-importer.service
+    enabled: yes
+    daemon_reload: yes
+  tags: lb
+
 - name: "LB | Restart scalelite.target"
   systemd:
     name: scalelite.target
