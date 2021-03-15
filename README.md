@@ -13,12 +13,16 @@ Ubuntu 16.04 LTS, Ansible 2.9.9, PostgreSQL 12.3, Nginx 1.16, Scalelite(images),
 ------
 Hardware requerements
 ------
-- BBB nodes: 4CPU, 8G RAM, 4G Swap, 200G Storage
+- BBB nodes: 4CPU, 8G RAM, 4G Swap, 200G Storage (public ip)
 - NFS node: 2CPU, 4G RAM, 4G Swap, 250G Storage, 600IOPS
+- Scalelite node: 4CPU, 8Gb RAM, 50G Storage (public ip)
+- TURN node: 4 CPU, 8Gb RAM, 50G Storage
 
 ------
-Network requerements
+Network requirements
 ------
+Private network: icmp, tcp, udp - no limitations
+Public network: 22, 80, 443 for BBB and Scalelite nodes
 - BBB nodes: opened ports (22/tcp, 80/tcp, 443/tcp, 53/tcp, 16384:32768/udp)
 - NFS node: opened ports (22/tcp, 2049/tcp, 111/tcp)
 - DNS A records to all BBB and Scalelite nodes
